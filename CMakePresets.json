@@ -1,0 +1,123 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-${presetName}",
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "-DQT_FORCE_ASSERTS",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "QT_FEATURE_icu": "OFF",
+        "QT_BUILD_TESTS_BY_DEFAULT": "OFF",
+        "QT_BUILD_EXAMPLES_BY_DEFAULT": "OFF",
+        "WARNINGS_ARE_ERRORS": "OFF",
+        "QT_BUILD_SUBMODULES": "qtbase;qtshadertools;qtdeclarative;qtsvg;qtmultimedia;qtwayland;qtserialbus;qtserialport;qt5compat;qttools;qtpositioning;qtscxml",
+        "CMAKE_INSTALL_PREFIX": "$env{PUB_DATA_DIR}/installed/Qt/qt-${presetName}"
+      }
+    },
+    {
+      "name": "dev",
+      "inherits": "base",
+      "cacheVariables": {
+        "FEATURE_developer_build": "ON",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "dev-clang",
+      "inherits": "dev",
+      "environment": {
+        "CXX": "clang++",
+        "CC": "clang"
+      }
+    },
+    {
+      "name": "dev-jemalloc",
+      "inherits": "dev",
+      "cacheVariables": {
+        "FEATURE_jemalloc": "ON"
+      }
+    },
+    {
+      "name": "rel",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "WARNINGS_ARE_ERRORS": "OFF"
+      }
+    },
+    {
+      "name": "dev-asan",
+      "inherits": "dev",
+      "description": "dev-asan",
+      "cacheVariables": {
+        "QT_FEATURE_sanitize_address": "ON",
+        "QT_FEATURE_sanitize_undefined": "ON",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "dev-tsan",
+      "inherits": "dev",
+      "description": "dev-tsan",
+      "cacheVariables": {
+        "QT_FEATURE_sanitize_thread": "ON",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "dev-qtbase",
+      "inherits": "dev",
+      "cacheVariables": {
+        "QT_BUILD_SUBMODULES": "qtbase"
+      }
+    },
+    {
+      "name": "dev-qtbase-qtdeclarative",
+      "inherits": "dev",
+      "cacheVariables": {
+        "QT_BUILD_SUBMODULES": "qtbase;qtdeclarative"
+      }
+    },
+    {
+      "name": "dev-wayland",
+      "inherits": "dev",
+      "cacheVariables": {
+        "QT_BUILD_SUBMODULES": "qtbase;qtdeclarative;qtwayland"
+      }
+    },
+    {
+      "name": "dev-kddockwidgets",
+      "inherits": "dev-qtbase-qtdeclarative",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "WARNINGS_ARE_ERRORS": "OFF"
+      }
+    },
+    {
+      "name": "dev-qtbase-asan",
+      "inherits": ["dev-asan"],
+      "cacheVariables": {
+        "QT_BUILD_SUBMODULES": "qtbase"
+      }
+    },
+    {
+      "name": "dev-qtbase-jemalloc",
+      "inherits": "dev",
+      "cacheVariables": {
+        "FEATURE_jemalloc": "ON",
+        "QT_BUILD_SUBMODULES": "qtbase"
+      }
+    },
+    {
+      "name": "dev-qtbase-jemalloc-asan",
+      "inherits": "dev-asan",
+      "cacheVariables": {
+        "FEATURE_jemalloc": "ON",
+        "QT_BUILD_SUBMODULES": "qtbase"
+      }
+    }
+  ]
+}
