@@ -1,0 +1,23 @@
+// Folder-specific settings
+//
+// For a full list of overridable settings, and general information on folder-specific settings,
+// see the documentation: https://zed.dev/docs/configuring-zed#settings-files
+{
+  "scrollbar": {
+    "git_diff": false
+  },
+  "git": {
+    "git_gutter": "hide"
+  },
+  "languages": {
+    "C++": {
+      "format_on_save": "off"
+    },
+    "C": {
+      "format_on_save": "off"
+    },
+    "CMake": {
+      "format_on_save": "off"
+    }
+  }
+}
